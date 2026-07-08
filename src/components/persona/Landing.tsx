@@ -110,47 +110,42 @@ function CanvasCursor({
   );
 }
 
-/** Product Hunt launch badge — PH-orange for instant recognition. */
+/**
+ * Official Product Hunt embed badge (light + dark theme variants).
+ * The widget live-updates the upvote count once the launch goes live.
+ */
 function ProductHuntBadge({ compact }: { compact?: boolean }) {
+  const alt =
+    "Folium AI - Turn product ideas into personas & UX research in minutes | Product Hunt";
+  const widget = (theme: "light" | "dark") =>
+    `https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=folium-ai&theme=${theme}`;
+  const imgClass = cn(
+    "w-auto max-w-full",
+    compact ? "h-10" : "h-[54px]",
+  );
   return (
     <a
-      href="https://www.producthunt.com/products/folium-ai?utm_source=badge&utm_medium=site"
+      href="https://www.producthunt.com/posts/folium-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-folium-ai"
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(
-        "border-border/80 bg-card inline-flex items-center rounded-xl border shadow-sm transition-colors hover:border-[#ff6154]/60",
-        compact ? "gap-2 px-2.5 py-1.5" : "gap-2.5 px-3.5 py-2",
-      )}
+      className="inline-block transition-transform hover:-translate-y-0.5"
     >
-      <svg
-        viewBox="0 0 40 40"
-        className={compact ? "size-6" : "size-8"}
-        aria-hidden
-      >
-        <circle cx="20" cy="20" r="20" fill="#ff6154" />
-        <path
-          fill="#fff"
-          d="M22.7 20H17v-6h5.7a3 3 0 0 1 0 6Zm0-10H13v20h4v-6h5.7a7 7 0 0 0 0-14Z"
-        />
-      </svg>
-      <span className="text-left leading-tight">
-        <span
-          className={cn(
-            "text-muted-foreground block font-semibold tracking-widest uppercase",
-            compact ? "text-[8px]" : "text-[9px]",
-          )}
-        >
-          Featured on
-        </span>
-        <span
-          className={cn(
-            "block font-bold text-[#ff6154]",
-            compact ? "text-xs" : "text-sm",
-          )}
-        >
-          Product Hunt
-        </span>
-      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element -- official Product Hunt widget */}
+      <img
+        src={widget("light")}
+        alt={alt}
+        width={250}
+        height={54}
+        className={cn(imgClass, "dark:hidden")}
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element -- official Product Hunt widget */}
+      <img
+        src={widget("dark")}
+        alt={alt}
+        width={250}
+        height={54}
+        className={cn(imgClass, "hidden dark:block")}
+      />
     </a>
   );
 }
