@@ -110,6 +110,51 @@ function CanvasCursor({
   );
 }
 
+/** Product Hunt launch badge — PH-orange for instant recognition. */
+function ProductHuntBadge({ compact }: { compact?: boolean }) {
+  return (
+    <a
+      href="https://www.producthunt.com/products/folium-ai?utm_source=badge&utm_medium=site"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        "border-border/80 bg-card inline-flex items-center rounded-xl border shadow-sm transition-colors hover:border-[#ff6154]/60",
+        compact ? "gap-2 px-2.5 py-1.5" : "gap-2.5 px-3.5 py-2",
+      )}
+    >
+      <svg
+        viewBox="0 0 40 40"
+        className={compact ? "size-6" : "size-8"}
+        aria-hidden
+      >
+        <circle cx="20" cy="20" r="20" fill="#ff6154" />
+        <path
+          fill="#fff"
+          d="M22.7 20H17v-6h5.7a3 3 0 0 1 0 6Zm0-10H13v20h4v-6h5.7a7 7 0 0 0 0-14Z"
+        />
+      </svg>
+      <span className="text-left leading-tight">
+        <span
+          className={cn(
+            "text-muted-foreground block font-semibold tracking-widest uppercase",
+            compact ? "text-[8px]" : "text-[9px]",
+          )}
+        >
+          Featured on
+        </span>
+        <span
+          className={cn(
+            "block font-bold text-[#ff6154]",
+            compact ? "text-xs" : "text-sm",
+          )}
+        >
+          Product Hunt
+        </span>
+      </span>
+    </a>
+  );
+}
+
 const TESTIMONIALS = [
   {
     name: "Elena Fischer",
@@ -340,6 +385,9 @@ export function Landing() {
             >
               or see a finished example first
             </a>
+            <div className="mt-6 flex justify-center">
+              <ProductHuntBadge />
+            </div>
           </motion.div>
         </div>
       </section>
@@ -839,11 +887,14 @@ export function Landing() {
               </Link>
             </nav>
           </div>
-          <p className="text-muted-foreground/70 mt-6 flex items-center gap-1.5 text-xs">
-            <Compass className="size-3.5" />
-            Built with Next.js, Tailwind CSS, shadcn/ui, Framer Motion &amp;
-            Claude.
-          </p>
+          <div className="mt-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <p className="text-muted-foreground/70 flex items-center gap-1.5 text-xs">
+              <Compass className="size-3.5" />
+              Built with Next.js, Tailwind CSS, shadcn/ui, Framer Motion &amp;
+              Claude.
+            </p>
+            <ProductHuntBadge compact />
+          </div>
         </div>
       </footer>
     </main>
