@@ -1,0 +1,393 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.75rem;
+
+  /* Neutrals — cool, near-white light theme */
+  --background: oklch(0.994 0.001 286);
+  --foreground: oklch(0.21 0.01 285);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.01 285);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.01 285);
+
+  --primary: oklch(0.2 0.03 255);
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(0.968 0.002 286);
+  --secondary-foreground: oklch(0.24 0.01 285);
+
+  --muted: oklch(0.97 0.002 286);
+  --muted-foreground: oklch(0.552 0.014 286);
+
+  --accent: oklch(0.965 0.004 286);
+  --accent-foreground: oklch(0.24 0.01 285);
+
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(0.918 0.004 286);
+  --input: oklch(0.912 0.004 286);
+  --ring: oklch(0.53 0.12 125);
+
+  /* Brand — Folium electric lime on ink (Optivus feel). The vivid lime is for
+     fills, buttons, and glows; --brand-text is a readable olive for text. */
+  --brand: oklch(0.92 0.23 124);
+  --brand-foreground: oklch(0.2 0.03 255);
+  --brand-subtle: oklch(0.96 0.09 122);
+  --brand-text: oklch(0.53 0.12 125);
+  /* Second stop for gradients (lime → warm yellow) */
+  --brand-2: oklch(0.9 0.17 98);
+  /* Ink — the deep charcoal-navy used for dark panels and primary buttons */
+  --ink: oklch(0.2 0.03 255);
+  --positive: oklch(0.55 0.14 135);
+
+  --shadow-color: 230 20% 30%;
+
+  --chart-1: oklch(0.54 0.22 277);
+  --chart-2: oklch(0.62 0.17 162);
+  --chart-3: oklch(0.7 0.19 48);
+  --chart-4: oklch(0.62 0.24 12);
+  --chart-5: oklch(0.6 0.16 245);
+}
+
+.dark {
+  /* Deep neutral-blue dark for users who prefer it (site defaults to light) */
+  --background: oklch(0.16 0.01 250);
+  --foreground: oklch(0.97 0.003 240);
+
+  --card: oklch(0.2 0.012 250);
+  --card-foreground: oklch(0.97 0.003 240);
+
+  --popover: oklch(0.205 0.012 250);
+  --popover-foreground: oklch(0.97 0.003 240);
+
+  --primary: oklch(0.96 0.002 286);
+  --primary-foreground: oklch(0.21 0.01 285);
+
+  --secondary: oklch(0.25 0.006 286);
+  --secondary-foreground: oklch(0.96 0.002 286);
+
+  --muted: oklch(0.246 0.006 286);
+  --muted-foreground: oklch(0.66 0.012 286);
+
+  --accent: oklch(0.27 0.007 286);
+  --accent-foreground: oklch(0.96 0.002 286);
+
+  --destructive: oklch(0.66 0.2 24);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.85 0.2 124);
+
+  --brand: oklch(0.92 0.23 124);
+  --brand-foreground: oklch(0.2 0.03 255);
+  --brand-subtle: oklch(0.3 0.06 125);
+  --brand-text: oklch(0.92 0.23 124);
+  --brand-2: oklch(0.9 0.17 98);
+  --ink: oklch(0.17 0.02 255);
+  --positive: oklch(0.88 0.21 130);
+
+  --shadow-color: 235 50% 3%;
+
+  --chart-1: oklch(0.64 0.2 277);
+  --chart-2: oklch(0.7 0.16 162);
+  --chart-3: oklch(0.75 0.18 60);
+  --chart-4: oklch(0.7 0.2 12);
+  --chart-5: oklch(0.68 0.15 245);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-subtle: var(--brand-subtle);
+  --color-brand-2: var(--brand-2);
+  --color-positive: var(--positive);
+  --color-ink: var(--ink);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --font-sans: var(--font-onest);
+  --font-mono: var(--font-geist-mono);
+
+  --shadow-xs: 0 1px 2px -1px hsl(var(--shadow-color) / 0.06);
+  --shadow-sm: 0 1px 2px 0 hsl(var(--shadow-color) / 0.05), 0 2px 6px -2px hsl(var(--shadow-color) / 0.06);
+  --shadow-md: 0 2px 4px -1px hsl(var(--shadow-color) / 0.05), 0 8px 20px -6px hsl(var(--shadow-color) / 0.1);
+  --shadow-lg: 0 4px 8px -2px hsl(var(--shadow-color) / 0.06), 0 20px 44px -12px hsl(var(--shadow-color) / 0.18);
+  --shadow-brand: 0 8px 30px -8px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  *:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--ring) 55%, transparent);
+    outline-offset: 2px;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: normal;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--brand) 22%, transparent);
+  }
+}
+
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Subtle dotted grid, fades toward the edges */
+  .bg-dots {
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--foreground) 8%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  /* Frosted nav / surfaces */
+  .glass {
+    background-color: color-mix(in oklab, var(--background) 72%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+  }
+
+  /* Zipchat-style frosted glass card: translucent white over a pastel wash,
+     blur(8px), a bright white hairline, and a soft layered shadow. */
+  .glass-card {
+    background-color: color-mix(in srgb, var(--card) 68%, transparent);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    border-color: color-mix(in srgb, #ffffff 48%, var(--border));
+    box-shadow:
+      0 8px 32px hsl(var(--shadow-color) / 0.08),
+      0 2px 8px hsl(var(--shadow-color) / 0.04);
+  }
+  .dark .glass-card {
+    background-color: color-mix(in srgb, var(--card) 52%, transparent);
+    border-color: oklch(1 0 0 / 12%);
+  }
+
+  /* Vivid text-brand is unreadable on light surfaces, so `text-brand` renders
+     the readable olive (--brand-text) instead. Fills (bg-brand) stay vivid.
+     Declared after Tailwind's utilities, so this wins the cascade. */
+  .text-brand {
+    color: var(--brand-text);
+  }
+
+  /* Optivus-style hero dome: an electric glow radiating from top center,
+     fading into the page background so content sits on a clean canvas.
+     The section is isolated and both pseudo-layers sit at z-index -1 so
+     they can never paint over the hero's content. */
+  .hero-dome {
+    isolation: isolate;
+  }
+  .hero-dome::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(0deg, var(--background) 30%, transparent 68%),
+      radial-gradient(
+        46% 42% at 50% 0%,
+        color-mix(in srgb, var(--brand) 48%, transparent) 0%,
+        transparent 100%
+      );
+  }
+  .dark .hero-dome::before {
+    background:
+      linear-gradient(0deg, var(--background) 30%, transparent 68%),
+      radial-gradient(
+        46% 42% at 50% 0%,
+        color-mix(in srgb, var(--brand) 20%, transparent) 0%,
+        transparent 100%
+      );
+  }
+  /* Fine horizontal scanlines over the dome, fading out toward the content */
+  .hero-dome::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--foreground) 9%, transparent) 0 1px,
+      transparent 1px 40px
+    );
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+    mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+  }
+  .dark .hero-dome::after {
+    background: repeating-linear-gradient(
+      180deg,
+      color-mix(in srgb, #ffffff 8%, transparent) 0 1px,
+      transparent 1px 40px
+    );
+  }
+
+  /* Endless artifact ticker in the stats band */
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  /* Soft brand-tinted washes, derived from the accent */
+  .sky-wash {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--brand) 30%, var(--background)),
+      color-mix(in srgb, var(--brand) 12%, var(--background)) 55%,
+      var(--background)
+    );
+  }
+  .dark .sky-wash {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--brand) 14%, var(--background)),
+      color-mix(in srgb, var(--brand) 6%, var(--background)) 55%,
+      var(--background)
+    );
+  }
+  .sky-wash-soft {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--brand) 16%, var(--background)),
+      var(--background)
+    );
+  }
+  .dark .sky-wash-soft {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--brand) 7%, var(--background)),
+      var(--background)
+    );
+  }
+
+  /* Soft brand glow behind the hero */
+  .hero-glow::before {
+    content: "";
+    position: absolute;
+    inset: -10% 0 auto 0;
+    height: 420px;
+    z-index: -1;
+    background: radial-gradient(
+      50% 60% at 50% 0%,
+      color-mix(in oklab, var(--brand) 13%, transparent),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      180deg,
+      var(--foreground),
+      color-mix(in oklab, var(--foreground) 62%, var(--muted-foreground))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-brand-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--brand),
+      var(--brand-2)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-brand-gradient {
+    background-image: linear-gradient(100deg, var(--brand), var(--brand-2));
+  }
+
+  /* Faint conic aura behind featured surfaces */
+  .aura::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      140deg,
+      color-mix(in oklab, var(--brand) 55%, transparent),
+      transparent 40%,
+      color-mix(in oklab, var(--brand-2) 45%, transparent)
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .animate-shimmer {
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+  @keyframes shimmer {
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
