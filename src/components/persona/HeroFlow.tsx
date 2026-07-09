@@ -189,7 +189,7 @@ export function HeroFlow() {
           maxLength={600}
           className="min-h-20 resize-none border-0 bg-transparent p-0 text-base shadow-none focus-visible:ring-0"
         />
-        <div className="mt-2 flex items-center justify-between">
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
           <span className="text-muted-foreground text-xs">
             One line is enough — Folium does the rest.
           </span>

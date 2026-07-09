@@ -101,7 +101,7 @@ function ChapterTitle({
   return (
     <motion.h2
       style={{ opacity, y }}
-      className="absolute inset-x-0 top-0 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl"
+      className="absolute inset-x-0 top-0 text-2xl font-bold tracking-tight text-balance text-white sm:text-5xl"
     >
       {CHAPTERS[index].title}
     </motion.h2>
@@ -124,7 +124,7 @@ function ChapterCaption({
   return (
     <motion.p
       style={{ opacity, y }}
-      className="absolute inset-x-0 top-0 text-sm leading-relaxed text-pretty text-white/65 sm:text-base"
+      className="absolute inset-x-0 top-0 text-xs leading-relaxed text-pretty text-white/65 sm:text-base"
     >
       <span className="text-brand mr-3 font-mono text-xs font-semibold">
         0{index + 1} / 0{N}
@@ -250,12 +250,13 @@ export function ScrollStory() {
           }}
         />
 
-        {/* Header — static eyebrow, chapter title crossfades */}
-        <div className="relative mx-auto w-full max-w-4xl px-4 pt-10 text-center sm:pt-14">
+        {/* Header — static eyebrow, chapter title crossfades. Extra top
+            padding on mobile so the sticky site header doesn't cover it. */}
+        <div className="relative mx-auto w-full max-w-4xl px-4 pt-18 text-center sm:pt-14">
           <span className="text-sm font-semibold tracking-widest uppercase [color:var(--brand)]">
             How it works
           </span>
-          <div className="relative mt-3 h-[5.5rem] sm:h-24">
+          <div className="relative mt-3 h-20 sm:h-24">
             {CHAPTERS.map((_, i) => (
               <ChapterTitle key={i} index={i} progress={scrollYProgress} />
             ))}
@@ -294,9 +295,10 @@ export function ScrollStory() {
               </SlideCard>
             </Slide>
 
-            {/* Slide 2 — personas fan out */}
+            {/* Slide 2 — personas fan out (scaled down on phones so the
+                side cards stay inside the frame) */}
             <Slide index={1} progress={scrollYProgress}>
-              <div className="relative flex justify-center">
+              <div className="relative flex justify-center max-sm:scale-[0.78]">
                 {[
                   { initials: "DS", hue: 150, name: "Diego", arch: "The Hands-On Doer", rot: -8, x: -150, y: 14, traits: ["practical", "visual"] },
                   { initials: "PN", hue: 330, name: "Priya", arch: "The Ambitious Skeptic", rot: 8, x: 150, y: 14, traits: ["driven", "wary"] },
@@ -430,15 +432,15 @@ export function ScrollStory() {
         </div>
 
         {/* Pagination dots */}
-        <div className="relative flex items-center justify-center gap-2 pt-5">
+        <div className="relative flex items-center justify-center gap-2 pt-4 sm:pt-5">
           {CHAPTERS.map((_, i) => (
             <Dot key={i} index={i} progress={scrollYProgress} />
           ))}
         </div>
 
         {/* Caption */}
-        <div className="relative mx-auto w-full max-w-4xl px-4 pt-4 pb-8 sm:pb-10">
-          <div className="relative h-16 sm:h-12">
+        <div className="relative mx-auto w-full max-w-4xl px-4 pt-3 pb-6 sm:pt-4 sm:pb-10">
+          <div className="relative h-14 sm:h-12">
             {CHAPTERS.map((_, i) => (
               <ChapterCaption key={i} index={i} progress={scrollYProgress} />
             ))}

@@ -803,10 +803,12 @@ export function Landing() {
               Ready to meet{" "}
               <span className="relative inline-block [color:var(--brand)]">
                 your users?
-                {/* Figma selection box with corner handles + layer tag */}
+                {/* Figma selection box with corner handles + layer tag.
+                    Hidden on mobile where the headline wraps and the tag
+                    would collide with the first line. */}
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute -inset-x-3 -inset-y-1.5 border-2 [border-color:color-mix(in_srgb,var(--brand)_75%,transparent)]"
+                  className="pointer-events-none absolute -inset-x-3 -inset-y-1.5 hidden border-2 [border-color:color-mix(in_srgb,var(--brand)_75%,transparent)] sm:block"
                 >
                   {["-top-1 -left-1", "-top-1 -right-1", "-bottom-1 -left-1", "-bottom-1 -right-1"].map(
                     (pos) => (

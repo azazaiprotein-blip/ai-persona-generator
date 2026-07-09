@@ -220,7 +220,7 @@ export default function StudioPage() {
 
         {/* Tabs + content */}
         <section className="mx-auto w-full max-w-6xl px-4 pt-8 pb-24">
-          <div className="mb-6 flex items-center justify-between gap-3">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <div className="bg-muted/60 inline-flex gap-1 rounded-lg border p-1">
               {tabs.map((t) => {
                 const active = view === t.id;
@@ -262,7 +262,7 @@ export default function StudioPage() {
                 <Link
                   href="/pricing"
                   className={cn(
-                    "flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                    "flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors",
                     runsLeft === 0
                       ? "border-destructive/40 bg-destructive/10 text-destructive hover:bg-destructive/15"
                       : "border-border bg-card text-muted-foreground hover:text-foreground",
