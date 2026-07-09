@@ -407,19 +407,21 @@ export default function PricingPage() {
                           </Link>
                         </Button>
                       ) : current ? (
-                        <Button variant="outline" disabled className="w-full border-white/25 bg-transparent text-white">
+                        <Button
+                          variant="outline"
+                          disabled
+                          className={cn(
+                            "w-full",
+                            t.popular && "border-white/25 bg-transparent text-white",
+                          )}
+                        >
                           Current plan
                         </Button>
                       ) : (
                         <Button
                           onClick={() => choose(t.id)}
-                          className={cn(
-                            "w-full",
-                            t.popular
-                              ? "bg-brand hover:bg-brand/90 shadow-brand [color:var(--brand-foreground)]"
-                              : undefined,
-                          )}
-                          variant={t.popular ? "default" : "outline"}
+                          className={cn("w-full", t.popular && "shadow-brand")}
+                          variant={t.popular ? "brand" : "outline"}
                         >
                           Upgrade to {t.name}
                           <ArrowRight className="size-4" />

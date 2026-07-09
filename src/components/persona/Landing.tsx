@@ -832,8 +832,9 @@ export function Landing() {
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Button
                 size="lg"
+                variant="brand"
                 asChild
-                className="bg-brand hover:bg-brand/90 shadow-brand [color:var(--brand-foreground)]"
+                className="shadow-brand"
               >
                 <Link href="/studio">
                   Start free
