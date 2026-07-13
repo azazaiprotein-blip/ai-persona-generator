@@ -32,7 +32,10 @@ import {
   type Brief,
 } from "@/lib/types";
 
-export const PENDING_BRIEF_KEY = "folium:pending-brief";
+export const PENDING_BRIEF_KEY = "theaix:pending-brief";
+/** Pre-rebrand key, still read once on the Studio so an in-flight handoff
+ *  spanning the rename isn't lost. */
+export const LEGACY_PENDING_BRIEF_KEY = "folium:pending-brief";
 
 const COUNTS = Array.from(
   { length: MAX_PERSONAS - MIN_PERSONAS + 1 },
@@ -191,7 +194,7 @@ export function HeroFlow() {
         />
         <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
           <span className="text-muted-foreground text-xs">
-            One line is enough — Folium does the rest.
+            One line is enough — Theaix does the rest.
           </span>
           <Button
             variant="brand"
@@ -210,7 +213,7 @@ export function HeroFlow() {
       <StepShell
         index={1}
         state={stateFor(1)}
-        summary={audience.trim() || "Folium will infer the audience"}
+        summary={audience.trim() || "Theaix will infer the audience"}
         onEdit={() => setStep(1)}
       >
         <Input
@@ -231,7 +234,7 @@ export function HeroFlow() {
             onClick={() => advance(2)}
             className="text-muted-foreground hover:text-foreground text-xs font-medium"
           >
-            Skip — let Folium infer it
+            Skip — let Theaix infer it
           </button>
           <Button variant="brand" size="sm" onClick={() => advance(2)} className="shadow-brand">
             Continue
@@ -316,7 +319,7 @@ export function HeroFlow() {
               </>
             ) : (
               <>
-                Generate my research
+                Generate Research
                 <ArrowRight className="size-4" />
               </>
             )}

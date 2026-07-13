@@ -22,23 +22,33 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   ),
-  title: "Folium — AI UX Research Copilot",
+  applicationName: "Theaix",
+  title: "Theaix — Build products people actually want",
   description:
-    "Turn your product idea into a complete UX research package in minutes — personas, empathy maps, journeys, jobs-to-be-done, opportunities, feature priorities, user stories, and go-to-market recommendations.",
+    "AI-powered product research that transforms a simple idea into personas, JTBD, empathy maps, user journeys, feature prioritization, user stories, and product strategy in minutes.",
   keywords: [
+    "product research",
     "UX research",
     "user personas",
+    "jobs to be done",
     "empathy map",
     "user journey map",
-    "jobs to be done",
-    "product discovery",
-    "AI research copilot",
+    "feature prioritization",
+    "product strategy",
+    "AI product research",
   ],
   openGraph: {
-    title: "Folium — AI UX Research Copilot",
+    title: "Theaix — Build products people actually want",
     description:
-      "Turn your product idea into a complete UX research package in minutes.",
+      "AI-powered product research that transforms a simple idea into personas, JTBD, empathy maps, user journeys, feature prioritization, user stories, and product strategy in minutes.",
+    siteName: "Theaix",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Theaix — Build products people actually want",
+    description:
+      "AI-powered product research that turns a simple idea into personas, JTBD, empathy maps, journeys, feature prioritization, user stories, and product strategy in minutes.",
   },
 };
 

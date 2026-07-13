@@ -31,7 +31,7 @@ import { cn } from "@/lib/utils";
 const CHAPTERS = [
   {
     title: "It starts with one line.",
-    body: "No surveys. No workshops. Just describe what you're building — Folium takes it from there.",
+    body: "No surveys. No workshops. Just describe what you're building — Theaix takes it from there.",
   },
   {
     title: "Meet the people you're building for.",

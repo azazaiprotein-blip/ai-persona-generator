@@ -1,8 +1,10 @@
 <div align="center">
 
-# 🍃 Folium
+# ▲ Theaix
 
-**Your AI UX research copilot — turn a product idea into a complete research package in minutes.**
+**Build products people actually want.**
+
+AI-powered product research that transforms a simple idea into personas, JTBD, empathy maps, user journeys, feature prioritization, user stories, and product strategy in minutes.
 
 Personas · Empathy maps · Journey maps · JTBD · Opportunities · Feature priorities · User stories · Product / Marketing / Design recs · Chat with your persona
 
@@ -14,7 +16,7 @@ Built with Next.js 16 · TypeScript · Tailwind CSS v4 · shadcn/ui · Framer Mo
 
 ## Overview
 
-Folium is a production-grade UX research workspace. From a single line of product
+Theaix is a production-grade product research workspace. From a single line of product
 context it generates a full, exportable research package and lets you explore it in a clean,
 modern SaaS dashboard — then interview your personas in character.
 

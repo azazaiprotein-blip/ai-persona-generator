@@ -23,7 +23,7 @@ export function SiteHeader({ variant = "marketing" }: SiteHeaderProps) {
       <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4">
         <Link href="/" className="group flex items-center gap-2">
           <Logo className="size-7 transition-transform group-hover:scale-105" />
-          <span className="text-base font-semibold tracking-tight">Folium</span>
+          <span className="text-base font-semibold tracking-tight">Theaix</span>
         </Link>
 
         {variant === "marketing" && (

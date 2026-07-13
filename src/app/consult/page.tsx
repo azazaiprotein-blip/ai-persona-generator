@@ -400,7 +400,7 @@ export default function ConsultPage() {
               </div>
 
               <YouBubble>
-                Folium just generated my whole research package — personas,
+                Theaix just generated my whole research package — personas,
                 journeys, the plan. It looks great… but how much of it should I
                 trust?
               </YouBubble>
@@ -584,7 +584,7 @@ export default function ConsultPage() {
 
         <footer className="border-t border-border/60">
           <div className="text-muted-foreground mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs sm:flex-row">
-            <span>Folium — your UX research copilot.</span>
+            <span>Theaix — your product research copilot.</span>
             <Link href="/pricing" className="hover:text-foreground">
               Prefer self-serve? See plans →
             </Link>

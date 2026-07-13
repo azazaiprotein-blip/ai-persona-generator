@@ -10,8 +10,27 @@
 
 export const FREE_ATTEMPTS = 3;
 
-const PLAN_KEY = "folium:plan";
-const ATTEMPTS_KEY = "folium:attempts-used";
+const PLAN_KEY = "theaix:plan";
+const ATTEMPTS_KEY = "theaix:attempts-used";
+
+// One-time migration from the pre-rebrand key namespace (folium:* → theaix:*)
+// so a visitor's chosen plan and used free attempts carry over the rename.
+if (typeof window !== "undefined") {
+  for (const [legacy, current] of [
+    ["folium:plan", PLAN_KEY],
+    ["folium:attempts-used", ATTEMPTS_KEY],
+  ] as const) {
+    try {
+      const value = window.localStorage.getItem(legacy);
+      if (value !== null && window.localStorage.getItem(current) === null) {
+        window.localStorage.setItem(current, value);
+        window.localStorage.removeItem(legacy);
+      }
+    } catch {
+      /* storage unavailable — nothing to migrate */
+    }
+  }
+}
 
 export type PlanId = "free" | "pro" | "studio";
 

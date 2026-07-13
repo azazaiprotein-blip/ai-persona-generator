@@ -64,7 +64,7 @@ export function personaToMarkdown(persona: Persona): string {
     p.tools.join(", "),
     "",
     `---`,
-    `_Generated with Folium${p.source === "ai" ? ` (${p.model ?? "Claude"})` : ""}._`,
+    `_Generated with Theaix${p.source === "ai" ? ` (${p.model ?? "Claude"})` : ""}._`,
     "",
   ].join("\n");
 }
@@ -198,7 +198,7 @@ export function projectToMarkdown(project: Project): string {
   out.push(`- **Accessibility:** ${a.design.accessibility}`);
   out.push(`- **Visual hierarchy:** ${a.design.visualHierarchy}`, "");
 
-  out.push(`---`, `_Generated with Folium._`, "");
+  out.push(`---`, `_Generated with Theaix._`, "");
   return out.join("\n");
 }
 

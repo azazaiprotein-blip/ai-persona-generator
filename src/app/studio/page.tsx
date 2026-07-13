@@ -15,7 +15,10 @@ import { ResearchWorkspace } from "@/components/workspace/ResearchWorkspace";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { PENDING_BRIEF_KEY } from "@/components/persona/HeroFlow";
+import {
+  LEGACY_PENDING_BRIEF_KEY,
+  PENDING_BRIEF_KEY,
+} from "@/components/persona/HeroFlow";
 import {
   FREE_ATTEMPTS,
   attemptsLeft,
@@ -71,9 +74,12 @@ export default function StudioPage() {
       return;
     }
     try {
-      const raw = window.localStorage.getItem(PENDING_BRIEF_KEY);
+      const raw =
+        window.localStorage.getItem(PENDING_BRIEF_KEY) ??
+        window.localStorage.getItem(LEGACY_PENDING_BRIEF_KEY);
       if (!raw) return;
       window.localStorage.removeItem(PENDING_BRIEF_KEY);
+      window.localStorage.removeItem(LEGACY_PENDING_BRIEF_KEY);
       const parsed = BriefSchema.safeParse(JSON.parse(raw));
       if (parsed.success) {
         void handleGenerate(parsed.data);
@@ -367,7 +373,7 @@ export default function StudioPage() {
 
         <footer className="border-t border-border/60">
           <div className="text-muted-foreground mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs sm:flex-row">
-            <span>Folium — your UX research copilot.</span>
+            <span>Theaix — your product research copilot.</span>
             <span>Projects are saved locally in your browser.</span>
           </div>
         </footer>

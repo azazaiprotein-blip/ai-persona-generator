@@ -35,7 +35,7 @@
   --input: oklch(0.912 0.004 286);
   --ring: oklch(0.53 0.12 125);
 
-  /* Brand — Folium electric lime on ink (Optivus feel). The vivid lime is for
+  /* Brand — Theaix electric lime on ink (Optivus feel). The vivid lime is for
      fills, buttons, and glows; --brand-text is a readable olive for text. */
   --brand: oklch(0.92 0.23 124);
   --brand-foreground: oklch(0.2 0.03 255);

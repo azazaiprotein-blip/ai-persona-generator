@@ -15,10 +15,31 @@ import {
 } from "./types";
 import { z } from "zod";
 
-const SAVED_KEY = "folium:saved";
-const HISTORY_KEY = "folium:history";
-const PROJECTS_KEY = "folium:projects";
+const SAVED_KEY = "theaix:saved";
+const HISTORY_KEY = "theaix:history";
+const PROJECTS_KEY = "theaix:projects";
 const HISTORY_LIMIT = 24;
+
+// One-time migration from the pre-rebrand key namespace (folium:* → theaix:*),
+// so existing saved personas, history, and projects survive the rename.
+// Idempotent: only copies when the new key is empty and the old one exists.
+if (typeof window !== "undefined") {
+  for (const [legacy, current] of [
+    ["folium:saved", SAVED_KEY],
+    ["folium:history", HISTORY_KEY],
+    ["folium:projects", PROJECTS_KEY],
+  ] as const) {
+    try {
+      const value = window.localStorage.getItem(legacy);
+      if (value !== null && window.localStorage.getItem(current) === null) {
+        window.localStorage.setItem(current, value);
+        window.localStorage.removeItem(legacy);
+      }
+    } catch {
+      /* storage unavailable — nothing to migrate */
+    }
+  }
+}
 
 const SavedSchema = z.array(PersonaSchema);
 

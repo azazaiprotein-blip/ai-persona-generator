@@ -116,7 +116,7 @@ function CanvasCursor({
  */
 function ProductHuntBadge({ compact }: { compact?: boolean }) {
   const alt =
-    "Folium AI - Turn product ideas into personas & UX research in minutes | Product Hunt";
+    "Theaix - Build products people actually want | Product Hunt";
   const widget = (theme: "light" | "dark") =>
     `https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=folium-ai&theme=${theme}`;
   const imgClass = cn(
@@ -181,7 +181,7 @@ const FAQS = [
   },
   {
     q: "Do I need an API key?",
-    a: "No. Folium works instantly with a built-in engine — every artifact and even the persona chat has a grounded local fallback. Add an ANTHROPIC_API_KEY to generate richer personas and chat responses with Claude.",
+    a: "No. Theaix works instantly with a built-in engine — every artifact and even the persona chat has a grounded local fallback. Add an ANTHROPIC_API_KEY to generate richer personas and chat responses with Claude.",
   },
   {
     q: "Can I really talk to my personas?",
@@ -305,7 +305,7 @@ export function Landing() {
 
         {/* drifting collaborator cursors */}
         <CanvasCursor
-          name="Folium"
+          name="Theaix"
           color="#1c2430"
           duration={12}
           className="top-[62%] left-[13%] hidden lg:block"
@@ -329,15 +329,14 @@ export function Landing() {
               Your AI UX research copilot
             </Badge>
             <h1 className="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-balance sm:text-6xl">
-              Turn your product idea into a{" "}
+              Build products people{" "}
               <span className="bg-brand text-brand-foreground rounded-xl px-2 [color:var(--brand-foreground)]">
-                research package
+                actually want
               </span>
             </h1>
             <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-lg text-balance">
-              Personas, empathy maps, journeys, jobs-to-be-done, feature
-              priorities, user stories, and go-to-market recommendations — from
-              a single line of context, in minutes.
+              Turn a simple product idea into complete UX research and product
+              strategy in minutes using AI.
             </p>
 
             {/* Rating / trust row */}
@@ -378,7 +377,7 @@ export function Landing() {
               href="#example"
               className="text-muted-foreground hover:text-foreground mt-4 inline-block text-sm underline underline-offset-4"
             >
-              or see a finished example first
+              See Demo
             </a>
             <div className="mt-6 flex justify-center">
               <ProductHuntBadge />
@@ -864,7 +863,7 @@ export function Landing() {
         <div className="mx-auto max-w-6xl px-4 py-10">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold">Folium</span>
+              <span className="text-sm font-semibold">Theaix</span>
               <Badge variant="secondary" className="font-normal">
                 <Target className="size-3" />
                 UX research copilot

@@ -553,7 +553,7 @@ export default function PricingPage() {
 
         <footer className="border-t border-border/60">
           <div className="text-muted-foreground mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs sm:flex-row">
-            <span>Folium — your UX research copilot.</span>
+            <span>Theaix — your product research copilot.</span>
             <span>Plans are simulated · no payment is ever collected.</span>
           </div>
         </footer>
