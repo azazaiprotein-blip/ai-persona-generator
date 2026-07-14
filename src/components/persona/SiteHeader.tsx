@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/persona/Logo";
+import { BrandLogo } from "@/components/persona/BrandLogo";
 
 interface SiteHeaderProps {
   variant?: "marketing" | "app";
@@ -21,11 +21,8 @@ export function SiteHeader({ variant = "marketing" }: SiteHeaderProps) {
   return (
     <header className="glass sticky top-0 z-40 border-b border-border/60">
       <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="group flex items-center gap-2">
-          <Logo className="size-7 transition-transform group-hover:scale-105" />
-          <span className="text-base font-semibold tracking-tight">
-            Fou<span className="text-brand">x</span>ium
-          </span>
+        <Link href="/" className="group flex items-center">
+          <BrandLogo className="transition-transform group-hover:scale-[1.03]" />
         </Link>
 
         {variant === "marketing" && (

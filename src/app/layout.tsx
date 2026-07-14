@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Onest } from "next/font/google";
 import "./globals.css";
+import { MagicBubble } from "@/components/persona/MagicBubble";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -78,6 +79,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>{children}</TooltipProvider>
+          <MagicBubble />
           <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>
