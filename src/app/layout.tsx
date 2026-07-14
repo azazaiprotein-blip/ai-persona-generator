@@ -22,8 +22,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   ),
-  applicationName: "Theaix",
-  title: "Theaix — Build products people actually want",
+  applicationName: "Fouxium",
+  title: "Fouxium — Build products people actually want",
   description:
     "AI-powered product research that transforms a simple idea into personas, JTBD, empathy maps, user journeys, feature prioritization, user stories, and product strategy in minutes.",
   keywords: [
@@ -38,15 +38,15 @@ export const metadata: Metadata = {
     "AI product research",
   ],
   openGraph: {
-    title: "Theaix — Build products people actually want",
+    title: "Fouxium — Build products people actually want",
     description:
       "AI-powered product research that transforms a simple idea into personas, JTBD, empathy maps, user journeys, feature prioritization, user stories, and product strategy in minutes.",
-    siteName: "Theaix",
+    siteName: "Fouxium",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Theaix — Build products people actually want",
+    title: "Fouxium — Build products people actually want",
     description:
       "AI-powered product research that turns a simple idea into personas, JTBD, empathy maps, journeys, feature prioritization, user stories, and product strategy in minutes.",
   },
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#12151d" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d1a30" },
   ],
 };
 

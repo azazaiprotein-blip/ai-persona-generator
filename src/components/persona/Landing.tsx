@@ -116,7 +116,7 @@ function CanvasCursor({
  */
 function ProductHuntBadge({ compact }: { compact?: boolean }) {
   const alt =
-    "Theaix - Build products people actually want | Product Hunt";
+    "Fouxium - Build products people actually want | Product Hunt";
   const widget = (theme: "light" | "dark") =>
     `https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=folium-ai&theme=${theme}`;
   const imgClass = cn(
@@ -181,7 +181,7 @@ const FAQS = [
   },
   {
     q: "Do I need an API key?",
-    a: "No. Theaix works instantly with a built-in engine — every artifact and even the persona chat has a grounded local fallback. Add an ANTHROPIC_API_KEY to generate richer personas and chat responses with Claude.",
+    a: "No. Fouxium works instantly with a built-in engine — every artifact and even the persona chat has a grounded local fallback. Add an ANTHROPIC_API_KEY to generate richer personas and chat responses with Claude.",
   },
   {
     q: "Can I really talk to my personas?",
@@ -264,7 +264,7 @@ export function Landing() {
             </span>
           ))}
 
-          {/* lime ring + dot for a splash of accent */}
+          {/* brand ring + dot for a splash of accent */}
           <span className="border-brand/50 absolute top-[14%] right-[7%] size-16 rounded-full border-2" />
           <span className="bg-brand absolute bottom-[24%] left-[18%] size-2.5 rounded-full" />
 
@@ -305,8 +305,8 @@ export function Landing() {
 
         {/* drifting collaborator cursors */}
         <CanvasCursor
-          name="Theaix"
-          color="#1c2430"
+          name="Fouxium"
+          color="#16294a"
           duration={12}
           className="top-[62%] left-[13%] hidden lg:block"
         />
@@ -325,7 +325,7 @@ export function Landing() {
             transition={{ duration: 0.5 }}
           >
             <Badge className="bg-ink mb-6 gap-1.5 border-transparent px-3 py-1 text-[13px] text-white">
-              <Sparkles className="text-brand size-3.5" />
+              <Sparkles className="size-3.5 [color:var(--brand-2)]" />
               Your AI UX research copilot
             </Badge>
             <h1 className="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-balance sm:text-6xl">
@@ -388,7 +388,7 @@ export function Landing() {
 
       {/* Artifact ticker — a dark tape strip cycling every UX term */}
       <section className="bg-ink relative overflow-hidden">
-        {/* lime sheen sweeping across the strip */}
+        {/* brand sheen sweeping across the strip */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -621,7 +621,7 @@ export function Landing() {
           {...fadeUp}
           className="glass-card relative overflow-hidden rounded-[2rem] border"
         >
-          {/* soft lime wash + canvas dots */}
+          {/* soft brand wash + canvas dots */}
           <div
             className="pointer-events-none absolute inset-0"
             style={{
@@ -737,7 +737,7 @@ export function Landing() {
           {...fadeUp}
           className="bg-ink relative overflow-hidden rounded-[2rem] px-6 py-20 text-center"
         >
-          {/* Optivus-style lime dome glowing from the top of the panel */}
+          {/* Optivus-style brand dome glowing from the top of the panel */}
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-72"
             style={{
@@ -795,26 +795,26 @@ export function Landing() {
 
           <div className="relative">
             <Badge className="border-white/15 bg-white/10 mb-5 gap-1.5 px-3 py-1 text-[13px] text-white backdrop-blur-sm">
-              <Sparkles className="size-3.5 [color:var(--brand)]" />
+              <Sparkles className="size-3.5 [color:var(--brand-2)]" />
               Free · No sign-up
             </Badge>
             <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
               Ready to meet{" "}
-              <span className="relative inline-block [color:var(--brand)]">
+              <span className="relative inline-block [color:var(--brand-2)]">
                 your users?
                 {/* Figma selection box with corner handles + layer tag.
                     Hidden on mobile where the headline wraps and the tag
                     would collide with the first line. */}
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute -inset-x-3 -inset-y-1.5 hidden border-2 [border-color:color-mix(in_srgb,var(--brand)_75%,transparent)] sm:block"
+                  className="pointer-events-none absolute -inset-x-3 -inset-y-1.5 hidden border-2 [border-color:color-mix(in_srgb,var(--brand-2)_75%,transparent)] sm:block"
                 >
                   {["-top-1 -left-1", "-top-1 -right-1", "-bottom-1 -left-1", "-bottom-1 -right-1"].map(
                     (pos) => (
                       <span
                         key={pos}
                         className={cn(
-                          "absolute size-2 border-2 bg-white [border-color:var(--brand)]",
+                          "absolute size-2 border-2 bg-white [border-color:var(--brand-2)]",
                           pos,
                         )}
                       />
@@ -863,7 +863,9 @@ export function Landing() {
         <div className="mx-auto max-w-6xl px-4 py-10">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold">Theaix</span>
+              <span className="text-sm font-semibold">
+                Fou<span className="text-brand">x</span>ium
+              </span>
               <Badge variant="secondary" className="font-normal">
                 <Target className="size-3" />
                 UX research copilot

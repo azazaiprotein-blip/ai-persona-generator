@@ -168,7 +168,7 @@ export default function PricingPage() {
               transition={{ duration: 0.5 }}
             >
               <Badge className="bg-ink mb-6 gap-1.5 border-transparent px-3 py-1 text-[13px] text-white">
-                <Sparkles className="size-3.5 [color:var(--brand)]" />
+                <Sparkles className="size-3.5 [color:var(--brand-2)]" />
                 Pricing
               </Badge>
               <h1 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-6xl">
@@ -363,7 +363,7 @@ export default function PricingPage() {
                         {t.monthly === 0 ? "forever" : "/ month"}
                       </span>
                       {billing === "annual" && t.monthly > 0 && (
-                        <span className="text-brand ml-1 text-xs font-semibold [color:var(--brand)]">
+                        <span className="ml-1 text-xs font-semibold [color:var(--brand-2)]">
                           billed yearly
                         </span>
                       )}
@@ -553,7 +553,7 @@ export default function PricingPage() {
 
         <footer className="border-t border-border/60">
           <div className="text-muted-foreground mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs sm:flex-row">
-            <span>Theaix — your product research copilot.</span>
+            <span>Fouxium — your product research copilot.</span>
             <span>Plans are simulated · no payment is ever collected.</span>
           </div>
         </footer>

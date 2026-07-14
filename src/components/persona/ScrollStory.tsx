@@ -31,7 +31,7 @@ import { cn } from "@/lib/utils";
 const CHAPTERS = [
   {
     title: "It starts with one line.",
-    body: "No surveys. No workshops. Just describe what you're building — Theaix takes it from there.",
+    body: "No surveys. No workshops. Just describe what you're building — Fouxium takes it from there.",
   },
   {
     title: "Meet the people you're building for.",
@@ -126,7 +126,7 @@ function ChapterCaption({
       style={{ opacity, y }}
       className="absolute inset-x-0 top-0 text-xs leading-relaxed text-pretty text-white/65 sm:text-base"
     >
-      <span className="text-brand mr-3 font-mono text-xs font-semibold">
+      <span className="mr-3 font-mono text-xs font-semibold [color:var(--brand-2)]">
         0{index + 1} / 0{N}
       </span>
       {CHAPTERS[index].body}
@@ -241,7 +241,7 @@ export function ScrollStory() {
   return (
     <section id="how" ref={ref} className="relative h-[380vh]">
       <div className="bg-ink sticky top-0 flex h-screen flex-col overflow-hidden">
-        {/* lime dome bleeding from the top of the dark stage */}
+        {/* brand dome bleeding from the top of the dark stage */}
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-64"
           style={{
@@ -253,7 +253,7 @@ export function ScrollStory() {
         {/* Header — static eyebrow, chapter title crossfades. Extra top
             padding on mobile so the sticky site header doesn't cover it. */}
         <div className="relative mx-auto w-full max-w-4xl px-4 pt-18 text-center sm:pt-14">
-          <span className="text-sm font-semibold tracking-widest uppercase [color:var(--brand)]">
+          <span className="text-sm font-semibold tracking-widest uppercase [color:var(--brand-2)]">
             How it works
           </span>
           <div className="relative mt-3 h-20 sm:h-24">

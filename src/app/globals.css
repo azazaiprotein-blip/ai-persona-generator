@@ -33,19 +33,19 @@
 
   --border: oklch(0.918 0.004 286);
   --input: oklch(0.912 0.004 286);
-  --ring: oklch(0.53 0.12 125);
+  --ring: oklch(0.546 0.245 262.9);
 
-  /* Brand — Theaix electric lime on ink (Optivus feel). The vivid lime is for
-     fills, buttons, and glows; --brand-text is a readable olive for text. */
-  --brand: oklch(0.92 0.23 124);
-  --brand-foreground: oklch(0.2 0.03 255);
-  --brand-subtle: oklch(0.96 0.09 122);
-  --brand-text: oklch(0.53 0.12 125);
-  /* Second stop for gradients (lime → warm yellow) */
-  --brand-2: oklch(0.9 0.17 98);
-  /* Ink — the deep charcoal-navy used for dark panels and primary buttons */
-  --ink: oklch(0.2 0.03 255);
-  --positive: oklch(0.55 0.14 135);
+  /* Brand — Fouxium wolf blue on deep navy. The vivid royal blue is for
+     fills, buttons, and glows; --brand-text is a readable deep blue for text. */
+  --brand: oklch(0.546 0.245 262.9);
+  --brand-foreground: oklch(0.985 0 0);
+  --brand-subtle: oklch(0.94 0.035 258);
+  --brand-text: oklch(0.5 0.24 263);
+  /* Second stop for gradients (royal blue → sky blue, like the emblem sweep) */
+  --brand-2: oklch(0.707 0.165 254.6);
+  /* Ink — the deep navy from the wolf emblem, used for dark panels and buttons */
+  --ink: oklch(0.21 0.042 257);
+  --positive: oklch(0.58 0.14 152);
 
   --shadow-color: 230 20% 30%;
 
@@ -84,15 +84,15 @@
 
   --border: oklch(1 0 0 / 9%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.85 0.2 124);
+  --ring: oklch(0.707 0.165 254.6);
 
-  --brand: oklch(0.92 0.23 124);
-  --brand-foreground: oklch(0.2 0.03 255);
-  --brand-subtle: oklch(0.3 0.06 125);
-  --brand-text: oklch(0.92 0.23 124);
-  --brand-2: oklch(0.9 0.17 98);
-  --ink: oklch(0.17 0.02 255);
-  --positive: oklch(0.88 0.21 130);
+  --brand: oklch(0.623 0.214 259.8);
+  --brand-foreground: oklch(0.985 0 0);
+  --brand-subtle: oklch(0.31 0.08 259);
+  --brand-text: oklch(0.707 0.165 254.6);
+  --brand-2: oklch(0.746 0.16 232.7);
+  --ink: oklch(0.18 0.035 257);
+  --positive: oklch(0.76 0.15 152);
 
   --shadow-color: 235 50% 3%;
 
@@ -218,8 +218,8 @@
     border-color: oklch(1 0 0 / 12%);
   }
 
-  /* Vivid text-brand is unreadable on light surfaces, so `text-brand` renders
-     the readable olive (--brand-text) instead. Fills (bg-brand) stay vivid.
+  /* `text-brand` renders the readable deep blue (--brand-text) so brand text
+     always passes contrast on light surfaces. Fills (bg-brand) stay vivid.
      Declared after Tailwind's utilities, so this wins the cascade. */
   .text-brand {
     color: var(--brand-text);
@@ -242,7 +242,7 @@
       linear-gradient(0deg, var(--background) 30%, transparent 68%),
       radial-gradient(
         46% 42% at 50% 0%,
-        color-mix(in srgb, var(--brand) 48%, transparent) 0%,
+        color-mix(in srgb, var(--brand) 30%, transparent) 0%,
         transparent 100%
       );
   }
@@ -292,8 +292,8 @@
   .sky-wash {
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--brand) 30%, var(--background)),
-      color-mix(in srgb, var(--brand) 12%, var(--background)) 55%,
+      color-mix(in srgb, var(--brand) 20%, var(--background)),
+      color-mix(in srgb, var(--brand) 8%, var(--background)) 55%,
       var(--background)
     );
   }
@@ -308,7 +308,7 @@
   .sky-wash-soft {
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--brand) 16%, var(--background)),
+      color-mix(in srgb, var(--brand) 10%, var(--background)),
       var(--background)
     );
   }

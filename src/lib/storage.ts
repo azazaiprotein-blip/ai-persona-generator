@@ -15,18 +15,22 @@ import {
 } from "./types";
 import { z } from "zod";
 
-const SAVED_KEY = "theaix:saved";
-const HISTORY_KEY = "theaix:history";
-const PROJECTS_KEY = "theaix:projects";
+const SAVED_KEY = "fouxium:saved";
+const HISTORY_KEY = "fouxium:history";
+const PROJECTS_KEY = "fouxium:projects";
 const HISTORY_LIMIT = 24;
 
-// One-time migration from the pre-rebrand key namespace (folium:* → theaix:*),
-// so existing saved personas, history, and projects survive the rename.
-// Idempotent: only copies when the new key is empty and the old one exists.
+// One-time migration from earlier key namespaces (theaix:* and folium:* →
+// fouxium:*) so existing saved personas, history, and projects survive the
+// rename. Idempotent, newest-namespace-first: only copies when the new key is
+// empty, so a more recent value always wins over an older one.
 if (typeof window !== "undefined") {
   for (const [legacy, current] of [
+    ["theaix:saved", SAVED_KEY],
     ["folium:saved", SAVED_KEY],
+    ["theaix:history", HISTORY_KEY],
     ["folium:history", HISTORY_KEY],
+    ["theaix:projects", PROJECTS_KEY],
     ["folium:projects", PROJECTS_KEY],
   ] as const) {
     try {

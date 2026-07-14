@@ -45,7 +45,7 @@ const bubbleIn = {
   },
 };
 
-/** Your message — lime bubble, right-aligned, optional read receipt. */
+/** Your message — brand-blue bubble, right-aligned, optional read receipt. */
 function YouBubble({ children, seen }: { children: React.ReactNode; seen?: boolean }) {
   return (
     <motion.div
@@ -60,7 +60,7 @@ function YouBubble({ children, seen }: { children: React.ReactNode; seen?: boole
       </div>
       {seen && (
         <span className="mt-1.5 flex items-center gap-1 text-[11px] text-white/40">
-          <CheckCheck className="size-3.5 [color:var(--brand)]" />
+          <CheckCheck className="size-3.5 [color:var(--brand-2)]" />
           Seen just now
         </span>
       )}
@@ -129,7 +129,7 @@ function AzazBubble({
 function ConsultScene() {
   return (
     <div aria-hidden className="relative mx-auto hidden w-full max-w-sm lg:block">
-      {/* soft lime blob behind everything */}
+      {/* soft brand-blue blob behind everything */}
       <svg
         viewBox="0 0 400 400"
         className="absolute -top-10 -left-8 w-[115%] opacity-60"
@@ -170,7 +170,7 @@ function ConsultScene() {
                 animate={{ scaleY: [0.4, 1, 0.4] }}
                 transition={{ duration: 1, delay: i * 0.1, repeat: Infinity, ease: "easeInOut" }}
                 style={{ height: h }}
-                className="bg-brand w-[3px] rounded-full"
+                className="w-[3px] rounded-full bg-brand-2"
               />
             ))}
           </span>
@@ -311,7 +311,7 @@ export default function ConsultPage() {
               transition={{ duration: 0.5 }}
             >
               <Badge className="bg-ink mb-6 gap-1.5 border-transparent px-3 py-1 text-[13px] text-white">
-                <UserRound className="size-3.5 [color:var(--brand)]" />
+                <UserRound className="size-3.5 [color:var(--brand-2)]" />
                 Free UX consultation
               </Badge>
               <h1 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-6xl">
@@ -357,7 +357,7 @@ export default function ConsultPage() {
             {...fadeUp}
             className="bg-ink relative overflow-hidden rounded-[1.75rem] shadow-2xl shadow-black/25"
           >
-            {/* canvas dots + lime glow inside the window */}
+            {/* canvas dots + brand glow inside the window */}
             <div
               className="pointer-events-none absolute inset-0"
               style={{
@@ -400,7 +400,7 @@ export default function ConsultPage() {
               </div>
 
               <YouBubble>
-                Theaix just generated my whole research package — personas,
+                Fouxium just generated my whole research package — personas,
                 journeys, the plan. It looks great… but how much of it should I
                 trust?
               </YouBubble>
@@ -584,7 +584,7 @@ export default function ConsultPage() {
 
         <footer className="border-t border-border/60">
           <div className="text-muted-foreground mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs sm:flex-row">
-            <span>Theaix — your product research copilot.</span>
+            <span>Fouxium — your product research copilot.</span>
             <Link href="/pricing" className="hover:text-foreground">
               Prefer self-serve? See plans →
             </Link>

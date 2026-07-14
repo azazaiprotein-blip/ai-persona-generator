@@ -10,14 +10,17 @@
 
 export const FREE_ATTEMPTS = 3;
 
-const PLAN_KEY = "theaix:plan";
-const ATTEMPTS_KEY = "theaix:attempts-used";
+const PLAN_KEY = "fouxium:plan";
+const ATTEMPTS_KEY = "fouxium:attempts-used";
 
-// One-time migration from the pre-rebrand key namespace (folium:* → theaix:*)
-// so a visitor's chosen plan and used free attempts carry over the rename.
+// One-time migration from earlier key namespaces (theaix:* and folium:* →
+// fouxium:*) so a visitor's chosen plan and used free attempts carry over the
+// rename. Newest-namespace-first: a more recent value wins.
 if (typeof window !== "undefined") {
   for (const [legacy, current] of [
+    ["theaix:plan", PLAN_KEY],
     ["folium:plan", PLAN_KEY],
+    ["theaix:attempts-used", ATTEMPTS_KEY],
     ["folium:attempts-used", ATTEMPTS_KEY],
   ] as const) {
     try {

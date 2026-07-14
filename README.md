@@ -1,6 +1,6 @@
 <div align="center">
 
-# ▲ Theaix
+# ▲ Fouxium
 
 **Build products people actually want.**
 
@@ -16,7 +16,7 @@ Built with Next.js 16 · TypeScript · Tailwind CSS v4 · shadcn/ui · Framer Mo
 
 ## Overview
 
-Theaix is a production-grade product research workspace. From a single line of product
+Fouxium is a production-grade product research workspace. From a single line of product
 context it generates a full, exportable research package and lets you explore it in a clean,
 modern SaaS dashboard — then interview your personas in character.
 
@@ -50,7 +50,7 @@ Every project produces a complete research package:
   a deterministic engine (and a grounded local chat) otherwise. Nothing ever fails.
 - 📤 **Export the whole package** — PDF, PNG, JPEG, Markdown, JSON, or copy to clipboard.
 - 💾 **Project workspace** — save, duplicate, favorite, search, and delete research projects.
-- 🎨 **Clean, modern SaaS UI** — light-first design with an electric-lime accent, glass cards, a scroll-driven story, plus full dark mode.
+- 🎨 **Clean, modern SaaS UI** — light-first design with a vivid wolf-blue accent, glass cards, a scroll-driven story, plus full dark mode.
 - ✨ **Motion & micro-interactions** — animated radar, journey chart, tabs, and skeleton loading.
 - ♿ **Accessible & responsive** — keyboard-navigable, tooltips, mobile-first.
 
