@@ -4,11 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  AlertTriangle,
   ArrowRight,
+  Banknote,
   CalendarCheck,
   Check,
   ChevronDown,
+  Clock,
   Compass,
+  HelpCircle,
   Quote,
   Sparkles,
   Star,
@@ -17,6 +21,8 @@ import {
 
 import { AvatarBlob } from "@/components/persona/AvatarBlob";
 import { BentoFeatures } from "@/components/persona/BentoFeatures";
+import { DotMesh } from "@/components/persona/DotMesh";
+import { FeatureFilms } from "@/components/persona/FeatureFilms";
 import { HeroFlow } from "@/components/persona/HeroFlow";
 import { ScrollStory } from "@/components/persona/ScrollStory";
 import { Badge } from "@/components/ui/badge";
@@ -69,6 +75,36 @@ const ARTIFACT_TICKER = [
   "Success metrics",
   "Go-to-market",
   "UX direction",
+];
+
+const PROBLEM_POINTS = [
+  {
+    icon: Clock,
+    text: "Real user research takes weeks of recruiting, interviews, and synthesis.",
+  },
+  {
+    icon: Banknote,
+    text: "Agencies and research panels cost thousands before the first insight lands.",
+  },
+  {
+    icon: HelpCircle,
+    text: (
+      <>
+        So teams guess — and{" "}
+        <strong className="font-semibold">
+          ship features nobody actually asked for.
+        </strong>
+      </>
+    ),
+  },
+];
+
+/** The people you're building for, as long as nobody's done the research. */
+const UNKNOWN_USERS = [
+  { initials: "?", hue: 220, name: "Early adopter?", detail: "Goals: unknown", chip: "Never interviewed", x: "sm:ml-16" },
+  { initials: "?", hue: 330, name: "Power user?", detail: "Frustrations: unknown", chip: "No data", x: "sm:ml-0" },
+  { initials: "?", hue: 150, name: "Decision maker?", detail: "Objections: unknown", chip: "Assumed", x: "sm:ml-24" },
+  { initials: "?", hue: 40, name: "Churn risk?", detail: "Jobs to be done: unknown", chip: "Guessing", x: "sm:ml-8" },
 ];
 
 /** Figma-style multiplayer cursor with a name tag, drifting on a loop. */
@@ -241,8 +277,16 @@ function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
 export function Landing() {
   return (
     <main className="relative">
-      {/* Hero — Optivus-style glow dome + direct input flow */}
-      <section className="hero-dome relative overflow-hidden">
+      {/* Hero — dark stage: constellation dots connecting behind the flow.
+          The `dark` class flips the token set for this subtree only, so the
+          nested cards/inputs restyle themselves while the rest of the page
+          stays light. */}
+      {/* -mt-17 slides the hero up behind the sticky pill nav (12px offset +
+          56px pill) so the black stage runs edge-to-edge to the top. */}
+      <section className="dark bg-ink text-foreground relative -mt-17 overflow-hidden">
+        {/* connecting-dots animation, fading out toward the next section */}
+        <DotMesh className="opacity-80 [mask-image:linear-gradient(180deg,#000_0%,#000_70%,transparent_100%)]" />
+
         {/* Canvas decorations — the research file is already open */}
         <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
           {/* plus marks, like an infinite canvas */}
@@ -267,46 +311,12 @@ export function Landing() {
           {/* brand ring + dot for a splash of accent */}
           <span className="border-brand/50 absolute top-[14%] right-[7%] size-16 rounded-full border-2" />
           <span className="bg-brand absolute bottom-[24%] left-[18%] size-2.5 rounded-full" />
-
-          {/* floating mini persona card */}
-          <motion.div
-            animate={{ y: [0, -12, 0], rotate: [-6, -4.5, -6] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="glass-card absolute top-[32%] left-[2%] hidden w-36 rounded-2xl border p-3 text-left xl:block"
-          >
-            <div className="flex items-center gap-2">
-              <AvatarBlob initials="MK" hue={268} className="size-7" />
-              <div>
-                <div className="text-xs font-semibold">Maya</div>
-                <div className="text-muted-foreground text-[9px]">
-                  Pragmatic Optimizer
-                </div>
-              </div>
-            </div>
-            <div className="mt-2.5 space-y-1">
-              <div className="bg-brand h-1 w-4/5 rounded-full" />
-              <div className="bg-brand-2/70 h-1 w-3/5 rounded-full" />
-              <div className="bg-muted-foreground/25 h-1 w-2/3 rounded-full" />
-            </div>
-          </motion.div>
-
-          {/* floating in-character chat bubble */}
-          <motion.div
-            animate={{ y: [0, -9, 0], rotate: [4, 5.5, 4] }}
-            transition={{ duration: 8, delay: 1, repeat: Infinity, ease: "easeInOut" }}
-            className="bg-ink absolute top-[38%] right-[2%] hidden max-w-45 rounded-2xl rounded-br-sm px-3.5 py-2.5 text-left text-xs text-white shadow-xl shadow-black/15 xl:block"
-          >
-            “Show me the outcome and I&apos;m in.”
-            <span className="mt-1 block text-[9px] text-white/50">
-              Maya · in-character chat
-            </span>
-          </motion.div>
         </div>
 
         {/* drifting collaborator cursors */}
         <CanvasCursor
           name="Fouxium"
-          color="#16294a"
+          color="#3a9e21"
           duration={12}
           className="top-[62%] left-[13%] hidden lg:block"
         />
@@ -318,21 +328,27 @@ export function Landing() {
           className="top-[34%] right-[9%] hidden lg:block"
         />
 
-        <div className="relative mx-auto max-w-6xl px-4 pt-16 pb-16 text-center sm:pt-24">
+        <div className="relative mx-auto max-w-6xl px-4 pt-32 pb-16 text-center sm:pt-40">
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Badge className="bg-ink mb-6 gap-1.5 border-transparent px-3 py-1 text-[13px] text-white">
-              <Sparkles className="size-3.5 [color:var(--brand-2)]" />
-              Your AI UX research copilot
-            </Badge>
-            <h1 className="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-balance sm:text-6xl">
-              Build products people{" "}
-              <span className="bg-brand text-brand-foreground rounded-xl px-2 [color:var(--brand-foreground)]">
-                actually want
+            <a
+              href="https://www.producthunt.com/posts/folium-ai?utm_source=hero-badge&utm_medium=badge"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 py-1 pr-3.5 pl-1 text-[13px] text-white shadow-sm backdrop-blur-sm transition-transform hover:-translate-y-0.5"
+            >
+              <span className="rounded-full bg-white/12 px-2 py-0.5 text-[10px] font-semibold tracking-wider text-white/70 uppercase">
+                Recent
               </span>
+              <span className="font-medium">
+                We just launched on Product Hunt
+              </span>
+            </a>
+            <h1 className="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-balance sm:text-6xl">
+              The fastest way to validate your next product.
             </h1>
             <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-lg text-balance">
               Turn a simple product idea into complete UX research and product
@@ -422,6 +438,75 @@ export function Landing() {
           </div>
         </div>
       </section>
+
+      {/* The problem — who are you actually building for? */}
+      <section className="mx-auto max-w-6xl px-4 py-20">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <motion.div {...fadeUp}>
+            <Badge variant="secondary" className="mb-4 gap-1.5 font-normal">
+              <AlertTriangle className="size-3.5 text-amber-500" />
+              The problem
+            </Badge>
+            <h2 className="max-w-lg text-3xl font-semibold tracking-tight text-balance sm:text-5xl">
+              It&apos;s hard to know who you&apos;re really building for
+            </h2>
+            <div className="mt-8 space-y-3">
+              {PROBLEM_POINTS.map((p, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.08 + i * 0.08 }}
+                  className="border-border/70 bg-card flex items-start gap-3 rounded-xl border px-4 py-3.5"
+                >
+                  <span className="bg-muted text-muted-foreground mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg">
+                    <p.icon className="size-4" />
+                  </span>
+                  <p className="text-sm leading-relaxed">{p.text}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* The cast you've never met — persona cards full of question marks */}
+          <div className="relative">
+            <div
+              aria-hidden
+              className="bg-brand absolute -inset-6 -z-10 rounded-[2rem] opacity-[0.07] blur-3xl"
+            />
+            <div className="flex flex-col gap-3">
+              {UNKNOWN_USERS.map((u, i) => (
+                <motion.div
+                  key={u.name}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ delay: 0.1 + i * 0.09 }}
+                  className={cn(
+                    "glass-card flex w-full max-w-sm items-center gap-3 rounded-2xl border px-4 py-3 shadow-lg",
+                    u.x,
+                  )}
+                >
+                  <AvatarBlob initials={u.initials} hue={u.hue} className="size-10 shrink-0 opacity-70" />
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm font-semibold">{u.name}</div>
+                    <div className="text-muted-foreground truncate text-xs">
+                      {u.detail}
+                    </div>
+                  </div>
+                  <span className="bg-muted text-muted-foreground shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium">
+                    {u.chip}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* See it in action — a short demo film per feature */}
+      <FeatureFilms />
 
       {/* Features */}
       <section id="features" className="mx-auto max-w-6xl px-4 py-20">
@@ -693,10 +778,10 @@ export function Landing() {
                       );
                     }),
                   )}
-                  {/* check on the claimed slot */}
+                  {/* check on the claimed slot — white on brand green */}
                   <path
                     d="m117 124 4 4 8-8"
-                    stroke="var(--ink)"
+                    stroke="#ffffff"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"

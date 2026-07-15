@@ -1,32 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Activity,
-  Check,
-  Download,
-  Megaphone,
-  MessageCircle,
-  Radar,
-  Target,
-  type LucideIcon,
-} from "lucide-react";
+import { Check } from "lucide-react";
 
 import { AvatarBlob } from "@/components/persona/AvatarBlob";
 import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
-/* Bento cell frame — header + description + a "screen" for the demo   */
+/* Bento cell frame — Wiza-style: a soft gray shell with the live demo
+   on a raised white card up top, then title + description underneath.  */
 /* ------------------------------------------------------------------ */
 
 function Cell({
-  icon: Icon,
   title,
   desc,
   className,
   children,
 }: {
-  icon: LucideIcon;
   title: string;
   desc: string;
   className?: string;
@@ -39,25 +29,19 @@ function Cell({
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "glass-card group flex flex-col overflow-hidden rounded-2xl border p-5",
+        "group bg-muted/50 border-border/50 flex flex-col overflow-hidden rounded-3xl border p-4 sm:p-5",
         className,
       )}
     >
-      <div className="flex items-center gap-2.5">
-        <span className="bg-brand-subtle text-brand flex size-8 shrink-0 items-center justify-center rounded-lg">
-          <Icon className="size-4" />
-        </span>
-        <h3 className="text-sm font-semibold">{title}</h3>
-      </div>
-      <p className="text-muted-foreground mt-2 text-xs leading-relaxed">{desc}</p>
-      {/* The "recording" frame */}
-      <div className="border-border/60 bg-background/60 relative mt-4 flex-1 overflow-hidden rounded-xl border">
-        <div className="border-border/50 bg-muted/50 flex items-center gap-1.5 border-b px-3 py-1.5">
-          <span className="size-2 rounded-full bg-rose-400/70" />
-          <span className="size-2 rounded-full bg-amber-400/70" />
-          <span className="size-2 rounded-full bg-emerald-400/70" />
-        </div>
+      {/* The demo, raised on its own white card */}
+      <div className="bg-card border-border/50 shadow-ink/4 relative flex-1 overflow-hidden rounded-2xl border shadow-lg">
         {children}
+      </div>
+      <div className="px-1.5 pt-5 pb-1">
+        <h3 className="text-[15px] font-semibold tracking-tight">{title}</h3>
+        <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
+          {desc}
+        </p>
       </div>
     </motion.div>
   );
@@ -411,7 +395,6 @@ export function BentoFeatures() {
   return (
     <div className="mt-12 grid gap-4 md:grid-cols-3">
       <Cell
-        icon={Radar}
         title="Personas + empathy maps"
         desc="Rich profiles with a personality radar, plus a 6-quadrant empathy map for every persona."
         className="min-h-[22rem] md:col-span-2"
@@ -419,7 +402,6 @@ export function BentoFeatures() {
         <RadarDemo />
       </Cell>
       <Cell
-        icon={MessageCircle}
         title="Chat with your persona"
         desc="Interview any persona in character — pressure-test pricing, features, and objections."
         className="min-h-[22rem]"
@@ -427,7 +409,6 @@ export function BentoFeatures() {
         <ChatDemo />
       </Cell>
       <Cell
-        icon={Activity}
         title="Journeys & jobs-to-be-done"
         desc="A 6-stage journey with emotions and opportunities, plus four kinds of jobs-to-be-done."
         className="min-h-[17rem]"
@@ -435,7 +416,6 @@ export function BentoFeatures() {
         <JourneyDemo />
       </Cell>
       <Cell
-        icon={Target}
         title="Feature strategy"
         desc="A MoSCoW board, 15+ user stories, MVP scope, UX risks, and success metrics."
         className="min-h-[17rem]"
@@ -443,7 +423,6 @@ export function BentoFeatures() {
         <MoscowDemo />
       </Cell>
       <Cell
-        icon={Megaphone}
         title="Marketing & design direction"
         desc="Positioning, value prop, ready-to-use headlines, and concrete UX recommendations."
         className="min-h-[17rem]"
@@ -451,7 +430,6 @@ export function BentoFeatures() {
         <CopyDemo />
       </Cell>
       <Cell
-        icon={Download}
         title="Export the whole package"
         desc="Ship it as PDF, PNG, Markdown, or JSON — and save, favorite, and search every project locally."
         className="min-h-[13rem] md:col-span-3"

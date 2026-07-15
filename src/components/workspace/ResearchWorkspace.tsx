@@ -14,12 +14,16 @@ import {
   FileType,
   FileImage,
   Gauge,
+  HardDriveUpload,
   Lightbulb,
+  Link2,
+  Mail,
   Megaphone,
   MessageCircle,
   Package,
   Palette,
   Rocket,
+  Share2,
   Sparkles,
   Target,
 } from "lucide-react";
@@ -44,7 +48,9 @@ import {
   projectToMarkdown,
   slugify,
 } from "@/lib/export";
+import { projectToEmailBody, projectToShareUrl } from "@/lib/share";
 import type { Project } from "@/lib/types";
+import { MeetRealPersona } from "./MeetRealPersona";
 import { PersonaSwitcher } from "./primitives";
 import { PersonaChat } from "./PersonaChat";
 import {
@@ -142,6 +148,57 @@ export function ResearchWorkspace({
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <MeetRealPersona persona={activePersona} />
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                <Share2 className="size-4" />
+                Share
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-60">
+              <DropdownMenuItem
+                onClick={async () => {
+                  try {
+                    const url = await projectToShareUrl(project);
+                    await copyToClipboard(url);
+                    toast.success("Public link copied", {
+                      description:
+                        "Anyone with the link can open this package — no account needed.",
+                    });
+                  } catch {
+                    toast.error("Couldn't create the share link");
+                  }
+                }}
+              >
+                <Link2 />
+                Copy public link
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  const subject = `UX research: ${project.name}`;
+                  window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(projectToEmailBody(project))}`;
+                }}
+              >
+                <Mail />
+                Share via email
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  downloadText(`${slug}.md`, projectToMarkdown(project), "text/markdown");
+                  window.open("https://drive.google.com/drive/my-drive", "_blank", "noopener");
+                  toast.success("Package downloaded", {
+                    description: `Drop ${slug}.md into the Drive tab that just opened.`,
+                  });
+                }}
+              >
+                <HardDriveUpload />
+                Add to Google Drive
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm">

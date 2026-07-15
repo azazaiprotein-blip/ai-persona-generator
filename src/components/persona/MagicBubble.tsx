@@ -36,8 +36,8 @@ const TIPS = [
   "Every extra form field costs conversions. Bite only what you need.",
 ];
 
-const RAIN_EMOJI = ["🐾", "✨", "💙", "🔍", "🧠", "🐺"];
-const CONFETTI_COLORS = ["#2e6ff2", "#60a5fa", "#93c5fd", "#0d1a30", "#ffffff"];
+const RAIN_EMOJI = ["🐾", "✨", "💚", "🔍", "🧠", "🐺"];
+const CONFETTI_COLORS = ["#4cb028", "#8fd63e", "#c9ef9c", "#0d1a30", "#ffffff"];
 
 type Popover =
   | { kind: "quote"; text: string; author: string }
@@ -60,7 +60,7 @@ function MarkImage({ className }: { className?: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element -- brand asset with graceful fallback
     <img
-      src="/brand/fouxium-mark.png"
+      src="/brand/fouxium-mark-white.png"
       alt=""
       aria-hidden
       ref={(el) => {
@@ -275,7 +275,11 @@ export function MagicBubble() {
               transition={{ duration: 1.6, times: [0, 0.16, 0.32, 0.48, 0.64, 0.82, 1] }}
               className="relative"
             >
-              <MarkImage className="size-14 rounded-full shadow-xl" />
+              {/* the mark PNG has a baked-in white square — crop + zoom so the
+                  green emblem fills the circle */}
+              <span className="block size-14 overflow-hidden rounded-full bg-white shadow-xl">
+                <MarkImage className="size-full scale-150 object-cover" />
+              </span>
               <span className="absolute top-1/2 -left-7 -translate-y-1/2 text-xl">
                 💨
               </span>
@@ -344,7 +348,7 @@ export function MagicBubble() {
           transition={{ duration: 0.55, ease: "easeOut" }}
           className="block size-11 overflow-hidden rounded-full"
         >
-          <MarkImage className="size-full object-cover" />
+          <MarkImage className="size-full scale-150 object-cover" />
         </motion.span>
       </motion.button>
     </>

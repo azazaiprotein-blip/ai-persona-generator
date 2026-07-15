@@ -3,8 +3,12 @@ import Anthropic from "@anthropic-ai/sdk";
 import {
   PERSONA_RESPONSE_JSON_SCHEMA,
   PersonaCoreSchema,
+  PersonaResearchSchema,
+  ProjectArtifactsSchema,
   type Brief,
   type PersonaCore,
+  type PersonaResearch,
+  type ProjectArtifacts,
 } from "./types";
 import { z } from "zod";
 
@@ -15,8 +19,12 @@ export function isAiConfigured(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY);
 }
 
+/** A persona core plus its AI-written research pack. */
+export type AiPersonaCore = PersonaCore & { research: PersonaResearch };
+
 const ResponseSchema = z.object({
-  personas: z.array(PersonaCoreSchema),
+  personas: z.array(PersonaCoreSchema.extend({ research: PersonaResearchSchema })),
+  artifacts: ProjectArtifactsSchema,
 });
 
 /**
@@ -48,7 +56,14 @@ function buildSystemPrompt(): string {
     "",
     "Field conventions: personality meters use a 0–100 scale where the label names the spectrum (0 = left trait, 100 = right trait). Jobs-to-be-done use the \"When ___, I want to ___, so I can ___\" form. The journey runs Awareness → Advocacy with a realistic sentiment (0–100) at each stage, including a dip where friction is genuinely likely for THIS product. Recommendations are concrete product or go-to-market moves for winning THIS persona for THIS product — they should be impossible to paste onto an unrelated app.",
     "",
-    "Before you finish, reread the whole set and ask: does any persona read as generic, or could it belong to a different product? If so, sharpen it until it couldn't. Only return personas that pass that bar.",
+    "Each persona also carries a research pack, written to the same bar:",
+    "- Empathy map (thinks / feels / says / does / pains / gains): every entry is a concrete, situated observation from this persona's actual week — the sentence they'd mutter at their desk, the workaround they run today, the thing they'd ask a colleague before trying this product. Name real situations, tools, amounts, and time pressures from their world. Nothing that could be pasted under a different persona.",
+    "- Journey map, exactly six stages in order: Awareness, Research, Decision, Onboarding, Daily Usage, Retention. Say where THIS persona would genuinely first hear of a product like this (the specific channel or community), what they'd compare it against (real alternative categories or competitors), the precise objection that stalls the Decision, the first-session moment that makes or breaks Onboarding, the habit the product must slot into for Daily Usage, and what would realistically lure them away at Retention. Sentiment values must tell an honest story with a visible dip.",
+    "- Jobs-to-be-done in four categories (functional, social, emotional, consumption), each anchored in one of this persona's real situations rather than generic tool-buying behavior.",
+    "",
+    "You also write the project-level strategy artifacts: opportunity areas, a MoSCoW feature board, 12–17 user stories, product recommendations with measurable metrics, marketing copy, and design direction. Ground all of it in the product and the personas you just created: features that only make sense for this product, user stories in the personas' actual roles and vocabulary, marketing copy that names the product's actual value in the requested tone, metrics tied to this product's real activation moment, and design direction that reflects its real workflows. Never fall back on interchangeable SaaS boilerplate like \"guided onboarding\", \"fewer tabs\", or \"results dashboard\" unless that is genuinely what this specific product needs — and then say it in this product's terms.",
+    "",
+    "Before you finish, reread everything — personas, empathy maps, journeys, jobs, and artifacts — and ask of each line: could this belong to a different product? If yes, sharpen it until it couldn't. This specificity is the entire value of the output.",
     "",
     "Return only data that conforms to the provided schema.",
   ].join("\n");
@@ -67,17 +82,17 @@ function buildUserPrompt(brief: Brief): string {
     : "Target audience: (not specified — infer the most plausible primary and secondary audiences from the product and industry)";
 
   return [
-    "I'm building the product below and need a research-grade set of personas I could actually recruit, interview, and design for. Generic or repetitive personas are worse than useless to me — I need people who clearly belong to THIS product.",
+    "I'm building the product below and need a research-grade package I could actually act on: personas I could recruit and interview, plus their empathy maps, journey maps, jobs-to-be-done, and the project-level strategy artifacts. Generic or repetitive output is worse than useless to me — every line must clearly belong to THIS product.",
     "",
     `Product / service: ${brief.product}`,
     audience,
     `Industry: ${brief.industry}`,
-    `Tone of voice for the quotes: ${brief.tone}`,
+    `Tone of voice for quotes and marketing copy: ${brief.tone}`,
     `Number of personas to generate: ${brief.count}`,
     "",
-    "First, reason through this product's world — its category and business model, the jobs people hire it for, the competitors and alternatives, the geographic and cultural context, how tech-comfortable this audience really is, and the domain pressures that come with it. Then decide which distinct, high-value user segments genuinely deserve their own persona here. Only then write them.",
+    "First, reason through this product's world — its category and business model, the jobs people hire it for, the competitors and alternatives, the geographic and cultural context, how tech-comfortable this audience really is, and the domain pressures that come with it. Then decide which distinct, high-value user segments genuinely deserve their own persona here. Only then write the personas, their research packs, and the strategy artifacts.",
     "",
-    `Generate exactly ${brief.count} personas. Each must be meaningfully different from the others in goals, temperament, life context, and technology comfort, and the whole set must feel specific to this product rather than a template that could be reused elsewhere.`,
+    `Generate exactly ${brief.count} personas, each with a full research pack (empathy map, six-stage journey map, categorized jobs-to-be-done). Each persona must be meaningfully different from the others in goals, temperament, life context, and technology comfort. Then write the project artifacts grounded in those personas. The whole package must read like it was researched for this exact product — reuse the brief's own vocabulary where it helps.`,
   ].join("\n");
 }
 
@@ -91,9 +106,11 @@ function buildUserPrompt(brief: Brief): string {
  * max_tokens (thinking + rich structured output for up to a few personas)
  * would otherwise risk an HTTP timeout on a non-streaming request.
  */
-export async function generatePersonasWithAI(
-  brief: Brief,
-): Promise<{ personas: PersonaCore[]; model: string }> {
+export async function generatePersonasWithAI(brief: Brief): Promise<{
+  personas: AiPersonaCore[];
+  artifacts: ProjectArtifacts;
+  model: string;
+}> {
   const client = new Anthropic();
 
   // `output_config` (structured outputs + effort) and `thinking` are the
@@ -101,7 +118,7 @@ export async function generatePersonasWithAI(
   // types predate them.
   const params = {
     model: MODEL,
-    max_tokens: 32000,
+    max_tokens: 48000,
     thinking: { type: "adaptive" },
     system: buildSystemPrompt(),
     messages: [{ role: "user", content: buildUserPrompt(brief) }],
@@ -131,6 +148,7 @@ export async function generatePersonasWithAI(
   const parsed = ResponseSchema.parse(JSON.parse(text));
   return {
     personas: parsed.personas.slice(0, brief.count),
+    artifacts: parsed.artifacts,
     model: message.model ?? MODEL,
   };
 }

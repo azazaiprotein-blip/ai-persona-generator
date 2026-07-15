@@ -54,10 +54,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d1a30" },
-  ],
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -75,7 +72,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
-          enableSystem
+          forcedTheme="light"
           disableTransitionOnChange
         >
           <TooltipProvider>{children}</TooltipProvider>

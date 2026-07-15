@@ -27,6 +27,7 @@ import {
   recordAttempt,
 } from "@/lib/plan";
 import { buildProjectArtifacts } from "@/lib/research";
+import { decodeShareHash } from "@/lib/share";
 import { SAMPLE_BRIEF, SAMPLE_PERSONA } from "@/lib/sample";
 import { useProjects } from "@/lib/storage";
 import {
@@ -69,6 +70,26 @@ export default function StudioPage() {
     if (autostarted.current) return;
     autostarted.current = true;
     void syncRunsLeft();
+    // A public share link carries the whole package in the URL fragment.
+    if (window.location.hash.startsWith("#share=")) {
+      const hash = window.location.hash;
+      void (async () => {
+        const shared = await decodeShareHash(hash);
+        if (shared) {
+          setProject(shared);
+          setShowForm(false);
+          window.history.replaceState(
+            null,
+            "",
+            window.location.pathname + window.location.search,
+          );
+          toast.success("Shared research package loaded");
+        } else {
+          toast.error("This share link is invalid or corrupted.");
+        }
+      })();
+      return;
+    }
     if (new URLSearchParams(window.location.search).get("example")) {
       void loadExampleProject();
       return;

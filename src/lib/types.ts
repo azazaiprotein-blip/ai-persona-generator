@@ -415,6 +415,61 @@ export const PERSONA_RESPONSE_JSON_SCHEMA = {
             description:
               "Actionable product/marketing recommendations for winning this persona.",
           },
+          research: {
+            type: "object",
+            additionalProperties: false,
+            description:
+              "The persona's deep-dive research pack. Every entry must be grounded in THIS product and THIS persona's life — never reusable filler.",
+            properties: {
+              empathyMap: {
+                type: "object",
+                additionalProperties: false,
+                description:
+                  "Six-quadrant empathy map. Each entry is a concrete, situated observation about this persona encountering this product.",
+                properties: {
+                  thinks: { type: "array", items: { type: "string" }, description: "Private thoughts, including doubts they'd never say aloud." },
+                  feels: { type: "array", items: { type: "string" }, description: "Emotional states with their trigger." },
+                  says: { type: "array", items: { type: "string" }, description: "Verbatim-style things they'd say to peers or in an interview." },
+                  does: { type: "array", items: { type: "string" }, description: "Observable behaviors and workarounds they do today." },
+                  pains: { type: "array", items: { type: "string" } },
+                  gains: { type: "array", items: { type: "string" } },
+                },
+                required: ["thinks", "feels", "says", "does", "pains", "gains"],
+              },
+              journeyMap: {
+                type: "array",
+                description:
+                  'Exactly six stages, in order: "Awareness", "Research", "Decision", "Onboarding", "Daily Usage", "Retention".',
+                items: {
+                  type: "object",
+                  additionalProperties: false,
+                  properties: {
+                    stage: { type: "string" },
+                    goal: { type: "string", description: "What this persona is trying to accomplish at this stage, in their own terms." },
+                    emotion: { type: "string", description: "Their emotional state, e.g. 'Skeptical but curious'." },
+                    sentiment: { type: "integer", description: "0 (frustrated) to 100 (delighted). Must be realistic, with a dip where friction is likely." },
+                    painPoint: { type: "string", description: "The specific friction at this stage for THIS product." },
+                    opportunity: { type: "string", description: "A concrete product/marketing move to win this stage." },
+                  },
+                  required: ["stage", "goal", "emotion", "sentiment", "painPoint", "opportunity"],
+                },
+              },
+              jtbd: {
+                type: "object",
+                additionalProperties: false,
+                description:
+                  'Jobs-to-be-done in "When ___, I want to ___, so I can ___" form, grounded in this persona\'s actual situations.',
+                properties: {
+                  functional: { type: "array", items: { type: "string" } },
+                  social: { type: "array", items: { type: "string" } },
+                  emotional: { type: "array", items: { type: "string" } },
+                  consumption: { type: "array", items: { type: "string" } },
+                },
+                required: ["functional", "social", "emotional", "consumption"],
+              },
+            },
+            required: ["empathyMap", "journeyMap", "jtbd"],
+          },
         },
         required: [
           "name",
@@ -441,9 +496,130 @@ export const PERSONA_RESPONSE_JSON_SCHEMA = {
           "jtbd",
           "journey",
           "recommendations",
+          "research",
         ],
       },
     },
+    artifacts: {
+      type: "object",
+      additionalProperties: false,
+      description:
+        "Project-level strategy artifacts. Every item must be specific to this product — if a line could be pasted into another product's research unchanged, rewrite it.",
+      properties: {
+        opportunities: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            ux: { type: "array", items: { type: "string" } },
+            business: { type: "array", items: { type: "string" } },
+            retention: { type: "array", items: { type: "string" } },
+            monetization: { type: "array", items: { type: "string" } },
+            accessibility: { type: "array", items: { type: "string" } },
+          },
+          required: ["ux", "business", "retention", "monetization", "accessibility"],
+        },
+        features: {
+          type: "object",
+          additionalProperties: false,
+          description: "MoSCoW feature prioritization with product-specific features.",
+          properties: {
+            mustHave: { type: "array", items: { $ref: "#/$defs/featureItem" } },
+            shouldHave: { type: "array", items: { $ref: "#/$defs/featureItem" } },
+            couldHave: { type: "array", items: { $ref: "#/$defs/featureItem" } },
+            future: { type: "array", items: { $ref: "#/$defs/featureItem" } },
+          },
+          required: ["mustHave", "shouldHave", "couldHave", "future"],
+        },
+        userStories: {
+          type: "array",
+          description:
+            "12–17 backlog-ready stories in the personas' actual roles and vocabulary.",
+          items: {
+            type: "object",
+            additionalProperties: false,
+            properties: {
+              role: { type: "string", description: "The persona's actual role, lowercase." },
+              want: { type: "string" },
+              soThat: { type: "string" },
+              priority: { type: "string", enum: ["Must", "Should", "Could"] },
+            },
+            required: ["role", "want", "soThat", "priority"],
+          },
+        },
+        product: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            topFeatures: { type: "array", items: { type: "string" } },
+            mvpScope: { type: "array", items: { type: "string" } },
+            niceToHave: { type: "array", items: { type: "string" } },
+            uxRisks: { type: "array", items: { type: "string" } },
+            metrics: {
+              type: "object",
+              additionalProperties: false,
+              description: "Measurable, product-specific success metrics.",
+              properties: {
+                activation: { type: "string" },
+                retention: { type: "string" },
+                northStar: { type: "string" },
+              },
+              required: ["activation", "retention", "northStar"],
+            },
+          },
+          required: ["topFeatures", "mvpScope", "niceToHave", "uxRisks", "metrics"],
+        },
+        marketing: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            positioning: { type: "string", description: 'Classic positioning statement: "For [audience] who [need], [product] is the [category] that [benefit] — unlike [alternative]."' },
+            valueProposition: { type: "string" },
+            headline: { type: "string" },
+            cta: { type: "string" },
+            emailSubject: { type: "string" },
+            adCopy: { type: "string" },
+            socialAngle: { type: "string" },
+          },
+          required: ["positioning", "valueProposition", "headline", "cta", "emailSubject", "adCopy", "socialAngle"],
+        },
+        design: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            navigation: { type: "string" },
+            informationArchitecture: { type: "string" },
+            dashboardLayout: { type: "string" },
+            onboarding: { type: "string" },
+            emptyStates: { type: "string" },
+            errorStates: { type: "string" },
+            accessibility: { type: "string" },
+            visualHierarchy: { type: "string" },
+          },
+          required: [
+            "navigation",
+            "informationArchitecture",
+            "dashboardLayout",
+            "onboarding",
+            "emptyStates",
+            "errorStates",
+            "accessibility",
+            "visualHierarchy",
+          ],
+        },
+      },
+      required: ["opportunities", "features", "userStories", "product", "marketing", "design"],
+    },
   },
-  required: ["personas"],
+  required: ["personas", "artifacts"],
+  $defs: {
+    featureItem: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        feature: { type: "string" },
+        why: { type: "string", description: "Why, grounded in a specific persona's needs." },
+      },
+      required: ["feature", "why"],
+    },
+  },
 } as const;

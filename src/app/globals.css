@@ -33,19 +33,20 @@
 
   --border: oklch(0.918 0.004 286);
   --input: oklch(0.912 0.004 286);
-  --ring: oklch(0.546 0.245 262.9);
+  --ring: oklch(0.55 0.16 137);
 
-  /* Brand — Fouxium wolf blue on deep navy. The vivid royal blue is for
-     fills, buttons, and glows; --brand-text is a readable deep blue for text. */
-  --brand: oklch(0.546 0.245 262.9);
-  --brand-foreground: oklch(0.985 0 0);
-  --brand-subtle: oklch(0.94 0.035 258);
-  --brand-text: oklch(0.5 0.24 263);
-  /* Second stop for gradients (royal blue → sky blue, like the emblem sweep) */
-  --brand-2: oklch(0.707 0.165 254.6);
-  /* Ink — the deep navy from the wolf emblem, used for dark panels and buttons */
-  --ink: oklch(0.21 0.042 257);
-  --positive: oklch(0.58 0.14 152);
+  /* Brand — Fouxium wolf green on near-black. The vivid grass green is for
+     fills, buttons, and glows (always with white text on top); --brand-text
+     is a readable deep green for text on light surfaces. */
+  --brand: oklch(0.7 0.21 137);
+  --brand-foreground: oklch(1 0 0);
+  --brand-subtle: oklch(0.95 0.05 132);
+  --brand-text: oklch(0.5 0.15 137);
+  /* Second stop for gradients (grass green → bright yellow-green highlight) */
+  --brand-2: oklch(0.84 0.21 130);
+  /* Ink — near-black with a whisper of green, for dark panels and buttons */
+  --ink: oklch(0.135 0.008 155);
+  --positive: oklch(0.55 0.15 145);
 
   --shadow-color: 230 20% 30%;
 
@@ -84,15 +85,15 @@
 
   --border: oklch(1 0 0 / 9%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.707 0.165 254.6);
+  --ring: oklch(0.76 0.22 134);
 
-  --brand: oklch(0.623 0.214 259.8);
-  --brand-foreground: oklch(0.985 0 0);
-  --brand-subtle: oklch(0.31 0.08 259);
-  --brand-text: oklch(0.707 0.165 254.6);
-  --brand-2: oklch(0.746 0.16 232.7);
-  --ink: oklch(0.18 0.035 257);
-  --positive: oklch(0.76 0.15 152);
+  --brand: oklch(0.76 0.22 134);
+  --brand-foreground: oklch(1 0 0);
+  --brand-subtle: oklch(0.31 0.07 137);
+  --brand-text: oklch(0.8 0.2 132);
+  --brand-2: oklch(0.86 0.21 129);
+  --ink: oklch(0.135 0.008 155);
+  --positive: oklch(0.78 0.16 145);
 
   --shadow-color: 235 50% 3%;
 

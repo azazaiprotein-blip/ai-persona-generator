@@ -269,7 +269,7 @@ export function ScrollStory() {
             className="relative h-full overflow-hidden rounded-3xl border border-white/8"
             style={{
               background:
-                "radial-gradient(95% 130% at 50% 0%, #3a4250 0%, #202633 58%, #161b25 100%)",
+                "radial-gradient(95% 130% at 50% 0%, #333b36 0%, #1d2320 58%, #121614 100%)",
             }}
           >
             {/* Slide 1 — the brief */}

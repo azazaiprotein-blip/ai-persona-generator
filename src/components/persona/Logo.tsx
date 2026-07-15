@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 
 /**
  * Fouxium mark — the wolf emblem. A white angular wolf head in profile with a
- * sweeping neck curve, set in a circular badge that runs deep navy → vivid
- * blue, matching the final brand logo.
+ * sweeping neck curve, set in a circular badge that runs bright yellow-green →
+ * deep grass green, matching the final brand logo.
  */
 export function Logo({ className }: { className?: string }) {
   return (
@@ -15,9 +15,9 @@ export function Logo({ className }: { className?: string }) {
     >
       <defs>
         <linearGradient id="fouxium-badge" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#2e6ff2" />
-          <stop offset="45%" stopColor="#16294a" />
-          <stop offset="100%" stopColor="#0d1a30" />
+          <stop offset="0%" stopColor="#8fd63e" />
+          <stop offset="45%" stopColor="#4cb028" />
+          <stop offset="100%" stopColor="#2a851b" />
         </linearGradient>
       </defs>
 
@@ -31,7 +31,7 @@ export function Logo({ className }: { className?: string }) {
       />
 
       {/* eye */}
-      <path d="M32.3 22.5 L34.2 20.9 L36.1 22.5 L34.2 24.1 Z" fill="#2e6ff2" />
+      <path d="M32.3 22.5 L34.2 20.9 L36.1 22.5 L34.2 24.1 Z" fill="#4cb028" />
 
       {/* sweeping neck / tail curve */}
       <path

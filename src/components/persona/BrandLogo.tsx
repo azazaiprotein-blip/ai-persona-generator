@@ -42,3 +42,31 @@ export function BrandLogo({ className }: { className?: string }) {
     </span>
   );
 }
+
+/**
+ * Just the circular wolf emblem — the favicon mark — cropped to a circle.
+ * The PNG has a baked-in white square, so we zoom it inside an overflow
+ * clip until the green disc fills the frame. Falls back to the inline SVG.
+ */
+export function BrandMark({ className }: { className?: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) return <Logo className={className} />;
+
+  return (
+    <span
+      className={cn("block overflow-hidden rounded-full bg-white", className)}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element -- brand asset with graceful onError fallback */}
+      <img
+        src="/brand/fouxium-mark-white.png"
+        alt="Fouxium"
+        ref={(el) => {
+          if (el && el.complete && el.naturalWidth === 0) setFailed(true);
+        }}
+        onError={() => setFailed(true)}
+        className="size-full scale-150 object-cover"
+      />
+    </span>
+  );
+}

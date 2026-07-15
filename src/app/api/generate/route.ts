@@ -47,14 +47,19 @@ export async function POST(request: Request) {
 
   const brief = parsed.data;
 
-  // Preferred path: generate personas with Claude when a key is configured.
+  // Preferred path: generate the full package with Claude when a key is
+  // configured — personas AND their research packs AND the project artifacts,
+  // all grounded in the brief rather than template-derived.
   if (isAiConfigured()) {
     try {
-      const { personas: cores, model } = await generatePersonasWithAI(brief);
-      const personas = assemble(cores, "ai", brief, model);
+      const { personas: cores, artifacts, model } = await generatePersonasWithAI(brief);
+      const personas: Persona[] = cores.map((core) => {
+        const base = enrichPersona(core, "ai", model);
+        return { ...base, research: core.research };
+      });
       const response: GenerateResponse = {
         personas,
-        artifacts: buildProjectArtifacts(brief, cores),
+        artifacts,
         source: "ai",
         model,
       };
