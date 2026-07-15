@@ -154,14 +154,14 @@ function ProductHuntBadge({ compact }: { compact?: boolean }) {
   const alt =
     "Fouxium - Build products people actually want | Product Hunt";
   const widget = (theme: "light" | "dark") =>
-    `https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=folium-ai&theme=${theme}`;
+    `https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=fouxium&theme=${theme}`;
   const imgClass = cn(
     "w-auto max-w-full",
     compact ? "h-10" : "h-[54px]",
   );
   return (
     <a
-      href="https://www.producthunt.com/posts/folium-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-folium-ai"
+      href="https://www.producthunt.com/posts/fouxium?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-fouxium"
       target="_blank"
       rel="noopener noreferrer"
       className="inline-block transition-transform hover:-translate-y-0.5"
@@ -335,7 +335,7 @@ export function Landing() {
             transition={{ duration: 0.5 }}
           >
             <a
-              href="https://www.producthunt.com/posts/folium-ai?utm_source=hero-badge&utm_medium=badge"
+              href="https://www.producthunt.com/posts/fouxium?utm_source=hero-badge&utm_medium=badge"
               target="_blank"
               rel="noopener noreferrer"
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 py-1 pr-3.5 pl-1 text-[13px] text-white shadow-sm backdrop-blur-sm transition-transform hover:-translate-y-0.5"
